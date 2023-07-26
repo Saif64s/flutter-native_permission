@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:native_device/services/api.dart';
+import 'package:native_device/services/db.dart';
 import 'package:path_provider/path_provider.dart' as syspaths;
 import 'package:path/path.dart' as path;
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -17,7 +17,7 @@ class UserPlacesNotifier extends _$UserPlacesNotifier {
   }
 
   Future<void> loadPlaces() async {
-    final db = await ApiService.getDatabase();
+    final db = await DBConnection.getDatabase();
     final data = await db.query('user_places');
     final places = data
         .map(
@@ -45,7 +45,7 @@ class UserPlacesNotifier extends _$UserPlacesNotifier {
     final newPlace =
         Place(title: title, image: copiedImage, location: location);
 
-    final db = await ApiService.getDatabase();
+    final db = await DBConnection.getDatabase();
     db.insert('user_places', {
       'id': newPlace.id,
       'title': newPlace.title,

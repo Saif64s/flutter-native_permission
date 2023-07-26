@@ -2,7 +2,7 @@ import 'package:sqflite/sqflite.dart' as sql;
 import 'package:sqflite/sqlite_api.dart';
 import 'package:path/path.dart' as path;
 
-class ApiService {
+class DBConnection {
   static Future<Database> getDatabase() async {
     final dbPath = await sql.getDatabasesPath();
     final db = await sql.openDatabase(
